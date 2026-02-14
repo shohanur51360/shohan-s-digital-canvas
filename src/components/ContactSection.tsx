@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, MapPin, Globe } from "lucide-react";
+import { Send, Mail, MapPin, Globe, MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
@@ -37,60 +37,77 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="section-padding">
-      <div className="container mx-auto">
+    <section id="contact" className="section-padding relative overflow-hidden">
+      <div className="orb w-[400px] h-[400px] bg-accent -top-32 -left-32" />
+      <div className="orb w-[300px] h-[300px] bg-primary bottom-0 right-0" />
+
+      <div className="container mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-primary/20 mb-4"
+          >
+            <MessageSquare size={14} className="text-primary" />
+            <span className="text-primary font-mono text-xs tracking-widest">GET IN TOUCH</span>
+          </motion.div>
           <h2 className="section-title">
-            {"{{ "}Hire <span className="text-primary">Me</span>{" }}"}
+            Hire <span className="text-gradient">Me</span>
           </h2>
         </motion.div>
 
         <div className="grid md:grid-cols-5 gap-10 max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="md:col-span-2 space-y-6"
           >
-            <p className="text-muted-foreground leading-relaxed text-sm">
-              Have a project in mind? Let's discuss how I can help bring your ideas to life. I'm always open to new opportunities.
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              Have a project in mind? Let's discuss how I can help bring your ideas to life.
             </p>
-            {contactInfo.map((info) => (
-              <a
+            {contactInfo.map((info, i) => (
+              <motion.a
                 key={info.label}
                 href={info.href}
-                className="flex items-center gap-3 group"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ x: 8 }}
+                className="flex items-center gap-4 group"
               >
-                <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-primary transition-colors">
-                  <info.icon size={16} className="text-primary group-hover:text-primary-foreground transition-colors" />
+                <div className="w-11 h-11 rounded-xl glass flex items-center justify-center group-hover:bg-gradient-primary group-hover:border-transparent transition-all duration-300">
+                  <info.icon size={18} className="text-primary group-hover:text-primary-foreground transition-colors" />
                 </div>
-                <span className="text-muted-foreground group-hover:text-foreground transition-colors text-sm">
+                <span className="text-muted-foreground group-hover:text-foreground transition-colors">
                   {info.label}
                 </span>
-              </a>
+              </motion.a>
             ))}
           </motion.div>
 
           <motion.form
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="md:col-span-3 bg-card border border-border rounded-xl p-8 space-y-4"
+            className="md:col-span-3 glass rounded-2xl p-8 space-y-5"
           >
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-5">
               <input
                 type="text"
                 name="name"
                 placeholder="Your Name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:shadow-lg focus:shadow-primary/10 transition-all duration-300"
                 maxLength={100}
               />
               <input
@@ -99,7 +116,7 @@ const ContactSection = () => {
                 placeholder="Your Email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:shadow-lg focus:shadow-primary/10 transition-all duration-300"
                 maxLength={255}
               />
             </div>
@@ -109,7 +126,7 @@ const ContactSection = () => {
               placeholder="Subject"
               value={form.subject}
               onChange={handleChange}
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+              className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:shadow-lg focus:shadow-primary/10 transition-all duration-300"
               maxLength={200}
             />
             <textarea
@@ -118,17 +135,19 @@ const ContactSection = () => {
               rows={5}
               value={form.message}
               onChange={handleChange}
-              className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+              className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:shadow-lg focus:shadow-primary/10 transition-all duration-300 resize-none"
               maxLength={1000}
             />
-            <button
+            <motion.button
               type="submit"
               disabled={sending}
-              className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium flex items-center gap-2 hover:opacity-90 transition-all disabled:opacity-50 text-sm"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-gradient-primary text-primary-foreground px-8 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:shadow-2xl hover:shadow-primary/30 transition-all disabled:opacity-50 glow"
             >
-              <Send size={14} />
+              <Send size={16} />
               Send Message
-            </button>
+            </motion.button>
           </motion.form>
         </div>
       </div>
