@@ -1,92 +1,83 @@
 import { motion } from "framer-motion";
-import { Code2, GraduationCap, Briefcase, Phone, MapPin, Mail, Globe, Download } from "lucide-react";
+import { Code2, GraduationCap, Briefcase, Terminal } from "lucide-react";
 
-const details = [
-  { label: "Phone", value: "+880 1XXXXXXXXX", icon: Phone },
-  { label: "City", value: "Dhaka, Bangladesh", icon: MapPin },
-  { label: "Degree", value: "Bachelor of Science", icon: GraduationCap },
-  { label: "Email", value: "shohancs.dev@gmail.com", icon: Mail },
-  { label: "Website", value: "shohancs.com", icon: Globe },
-  { label: "Status", value: "Open to Work", icon: Briefcase },
+const stats = [
+  { icon: Code2, label: "Clean Code", value: "Best Practices", color: "from-primary to-primary" },
+  { icon: GraduationCap, label: "Education", value: "BSc in CSE", color: "from-accent to-accent" },
+  { icon: Briefcase, label: "Speciality", value: "Laravel Expert", color: "from-primary to-accent" },
 ];
 
 const AboutSection = () => {
   return (
-    <section id="about" className="section-padding">
-      <div className="container mx-auto">
+    <section id="about" className="section-padding relative overflow-hidden">
+      {/* Decorative orbs */}
+      <div className="orb w-[300px] h-[300px] bg-accent top-20 -right-20" />
+      <div className="orb w-[200px] h-[200px] bg-primary bottom-20 -left-20" />
+
+      <div className="container mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-primary/20 mb-4"
+          >
+            <Terminal size={14} className="text-primary" />
+            <span className="text-primary font-mono text-xs tracking-widest">WHO I AM</span>
+          </motion.div>
           <h2 className="section-title">
-            {"{{ "}About <span className="text-primary">Me</span>{" }}"}
+            About <span className="text-gradient">Me</span>
           </h2>
-          <p className="text-muted-foreground mt-2">Software Engineer | Laravel Specialist</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-5"
+            transition={{ duration: 0.6 }}
           >
-            <p className="text-muted-foreground leading-relaxed">
-              I'm <span className="text-foreground font-semibold">Shahanur Rahman Shohan</span>, a Full-Stack Software Engineer with deep expertise in Laravel and PHP ecosystems. I hold a BSc in Computer Science & Engineering and I'm passionate about building scalable, secure, and maintainable web applications.
+            <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
+              I'm <span className="text-foreground font-semibold">Shahanur Rahman Shohan</span>, a Full-Stack Software Engineer with deep expertise in
+              <span className="text-primary"> Laravel</span> and
+              <span className="text-accent"> PHP</span> ecosystems.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed mb-6">
               From REST APIs and admin panels to e-commerce platforms and POS systems — I build solutions that solve real business problems. I focus on clean architecture, performance optimization, and modern development practices.
             </p>
-
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {details.map((d) => (
-                <div key={d.label} className="flex items-center gap-2 text-sm">
-                  <d.icon size={14} className="text-primary shrink-0" />
-                  <div>
-                    <span className="text-muted-foreground">{d.label}: </span>
-                    <span className="text-foreground font-medium">{d.value}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="/Shahanur_Rahman_Shohan_CV.pdf"
-              download
-              className="inline-flex items-center gap-2 text-primary font-medium mt-4 hover:underline"
-            >
-              <Download size={14} />
-              Download Resume
-            </a>
+            <p className="text-muted-foreground leading-relaxed">
+              My toolkit spans the full web stack: PHP, Laravel, JavaScript, jQuery, MySQL, Bootstrap, Tailwind CSS, and much more. I handle everything from development to deployment.
+            </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="grid gap-4"
+            transition={{ duration: 0.6 }}
+            className="grid gap-5"
           >
-            {[
-              { icon: Code2, label: "Clean Code", value: "Best Practices & Patterns" },
-              { icon: GraduationCap, label: "Education", value: "BSc in CSE" },
-              { icon: Briefcase, label: "Speciality", value: "Laravel Expert" },
-            ].map((stat, i) => (
+            {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-card border border-border rounded-xl p-5 flex items-center gap-4 card-hover"
+                transition={{ delay: i * 0.15 }}
+                whileHover={{ x: 8, scale: 1.02 }}
+                className="glass rounded-2xl p-6 flex items-center gap-5 card-3d cursor-default"
               >
-                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                  <stat.icon size={20} className="text-primary" />
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shrink-0 shadow-lg`}>
+                  <stat.icon size={24} className="text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">{stat.label}</p>
-                  <p className="text-sm font-semibold text-foreground">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  <p className="text-lg font-bold text-foreground">{stat.value}</p>
                 </div>
               </motion.div>
             ))}
