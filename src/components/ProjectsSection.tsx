@@ -34,69 +34,72 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="section-padding bg-card/30">
+    <section id="projects" className="section-padding bg-accent/30">
       <div className="container mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-mono text-sm tracking-widest mb-2">MY WORK</p>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Featured <span className="text-gradient">Projects</span>
+          <h2 className="section-title">
+            {"{{ "}Featured <span className="text-primary">Projects</span>{" }}"}
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass rounded-xl p-7 group hover:border-primary/50 transition-all duration-300 card-3d"
+              className="bg-card border border-border rounded-xl p-6 text-center card-hover group"
             >
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="text-xl font-bold text-foreground group-hover:text-gradient transition-all">
-                  {project.title}
-                </h3>
-                <div className="flex items-center gap-3">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label={`${project.title} GitHub`}
-                  >
-                    <Github size={18} />
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label={`${project.title} Live`}
-                  >
-                    <ExternalLink size={18} />
-                  </a>
-                </div>
+              <div className="w-16 h-16 rounded-xl bg-accent flex items-center justify-center mx-auto mb-4 group-hover:bg-primary transition-colors duration-200">
+                <span className="text-2xl font-bold text-primary group-hover:text-primary-foreground transition-colors">
+                  {project.title.charAt(0)}
+                </span>
               </div>
 
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+              <h3 className="text-foreground font-semibold mb-2 text-sm">
+                {project.title}
+              </h3>
+
+              <p className="text-muted-foreground text-xs leading-relaxed mb-4">
                 {project.desc}
               </p>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center gap-1.5 mb-4">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-mono px-2.5 py-1 rounded-md bg-secondary text-primary"
+                    className="text-[10px] font-mono px-2 py-0.5 rounded bg-accent text-accent-foreground"
                   >
                     {tag}
                   </span>
                 ))}
+              </div>
+
+              <div className="flex items-center justify-center gap-3">
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary text-primary-foreground px-4 py-1.5 rounded-md text-xs font-medium hover:opacity-90 transition-opacity"
+                >
+                  View Details
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  aria-label={`${project.title} GitHub`}
+                >
+                  <Github size={16} />
+                </a>
               </div>
             </motion.div>
           ))}

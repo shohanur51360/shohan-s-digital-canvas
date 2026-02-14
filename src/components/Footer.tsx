@@ -2,12 +2,8 @@ import { Github, Linkedin, Facebook, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border py-10 px-4">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-muted-foreground text-sm">
-          © {new Date().getFullYear()}{" "}
-          <span className="text-gradient font-semibold">Shahanur Rahman Shohan</span>. All rights reserved.
-        </p>
+    <footer className="border-t border-border py-8 px-4">
+      <div className="container mx-auto flex flex-col items-center gap-4">
         <div className="flex items-center gap-4">
           {[
             { icon: Github, href: "https://github.com/shohancs" },
@@ -20,12 +16,16 @@ const Footer = () => {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
             >
-              <s.icon size={16} />
+              <s.icon size={14} />
             </a>
           ))}
         </div>
+        <p className="text-muted-foreground text-xs">
+          Copyright © {new Date().getFullYear()}{" "}
+          <span className="text-foreground font-medium">Shahanur Rahman Shohan</span>. All Rights Reserved.
+        </p>
       </div>
     </footer>
   );

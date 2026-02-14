@@ -24,29 +24,28 @@ const ServicesSection = () => {
     <section id="services" className="section-padding">
       <div className="container mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-mono text-sm tracking-widest mb-2">WHAT I DO</p>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            My <span className="text-gradient">Services</span>
+          <h2 className="section-title">
+            {"{{ "}My <span className="text-primary">Services</span>{" }}"}
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="glass rounded-xl p-6 group hover:border-primary/50 transition-all duration-300 card-3d"
+              transition={{ delay: i * 0.04 }}
+              className="bg-card border border-border rounded-xl p-6 card-hover group"
             >
-              <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <service.icon size={22} className="text-primary-foreground" />
+              <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-200">
+                <service.icon size={20} className="text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
               <h3 className="text-foreground font-semibold mb-2 text-sm">{service.title}</h3>
               <p className="text-muted-foreground text-xs leading-relaxed">{service.desc}</p>

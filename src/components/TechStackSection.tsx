@@ -1,70 +1,65 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
-const categories = [
-  {
-    title: "Languages & Frameworks",
-    techs: ["PHP", "Laravel", "JavaScript", "jQuery", "HTML", "CSS"],
-  },
-  {
-    title: "Frontend & Styling",
-    techs: ["Bootstrap", "Tailwind CSS", "AJAX", "JSON"],
-  },
-  {
-    title: "Database & Backend",
-    techs: ["MySQL", "Eloquent ORM", "REST API", "Webhook", "Authentication", "JWT", "Sanctum"],
-  },
-  {
-    title: "DevOps & Tools",
-    techs: ["Git", "GitHub", "Composer", "NPM", "VS Code", "Sublime Text", "cPanel", "SSL"],
-  },
-  {
-    title: "Concepts & Patterns",
-    techs: ["OOP", "MVC", "CRUD", "Migrations", "Seeders", "Relationships", "Role Management"],
-  },
-];
+const categories: Record<string, string[]> = {
+  All: [],
+  Skills: ["PHP", "Laravel", "JavaScript", "jQuery", "HTML", "CSS", "Bootstrap", "Tailwind CSS", "MySQL", "AJAX", "JSON", "REST API", "OOP", "MVC"],
+  Tools: ["Git", "GitHub", "Composer", "NPM", "VS Code", "Sublime Text", "cPanel", "SSL", "Webhook"],
+};
+
+// Fill "All" with everything
+categories.All = [...new Set([...categories.Skills, ...categories.Tools])];
 
 const TechStackSection = () => {
+  const [active, setActive] = useState("All");
+
   return (
-    <section className="section-padding bg-card/30">
+    <section id="techstack" className="section-padding bg-accent/30">
       <div className="container mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <p className="text-primary font-mono text-sm tracking-widest mb-2">WHAT I USE</p>
-          <h2 className="text-3xl md:text-5xl font-bold">
-            Tech <span className="text-gradient">Stack</span>
+          <h2 className="section-title">
+            {"{{ "}Tech <span className="text-primary">Stack</span>{" }}"}
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat, ci) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: ci * 0.1 }}
-              className="glass rounded-xl p-6 card-3d"
+        {/* Filter tabs */}
+        <div className="flex items-center justify-center gap-3 mb-10">
+          {Object.keys(categories).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                active === cat
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card border border-border text-muted-foreground hover:text-foreground"
+              }`}
             >
-              <h3 className="text-primary font-semibold mb-4 text-sm tracking-wide">
-                {cat.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.techs.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-200 cursor-default"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
+
+        <motion.div
+          key={active}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-3 max-w-3xl mx-auto"
+        >
+          {categories[active].map((tech) => (
+            <span
+              key={tech}
+              className="px-4 py-2 rounded-lg bg-card border border-border text-sm font-medium text-foreground hover:border-primary hover:text-primary transition-colors duration-200 cursor-default"
+            >
+              {tech}
+            </span>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
