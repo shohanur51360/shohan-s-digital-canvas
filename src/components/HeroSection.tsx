@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Mail, Download, ChevronDown, Sparkles } from "lucide-react";
+import { Github, Linkedin, Facebook, Mail, Download, ChevronDown } from "lucide-react";
 
 const socials = [
   { icon: Github, href: "https://github.com/shohancs", label: "GitHub" },
@@ -8,28 +8,36 @@ const socials = [
   { icon: Mail, href: "mailto:shohancs.dev@gmail.com", label: "Email" },
 ];
 
-const FloatingOrbs = () => (
+const FloatingParticles = () => (
   <>
-    <div className="orb w-[500px] h-[500px] bg-primary -top-40 -left-40 animate-float-slow" />
-    <div className="orb w-[400px] h-[400px] bg-accent -bottom-32 -right-32 animate-float-delay" />
-    <div className="orb w-[300px] h-[300px] bg-primary top-1/3 right-1/4 animate-float" />
+    {[...Array(20)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute w-1 h-1 rounded-full bg-primary/30"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          y: [0, -30, 0],
+          opacity: [0.2, 0.8, 0.2],
+        }}
+        transition={{
+          duration: 3 + Math.random() * 4,
+          repeat: Infinity,
+          delay: Math.random() * 3,
+        }}
+      />
+    ))}
   </>
-);
-
-const GridPattern = () => (
-  <div className="absolute inset-0 opacity-[0.03]"
-    style={{
-      backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
-      backgroundSize: '60px 60px',
-    }}
-  />
 );
 
 const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <FloatingOrbs />
-      <GridPattern />
+      {/* Subtle radial gradient background */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(var(--primary)/0.08)_0%,_transparent_70%)]" />
+      <FloatingParticles />
 
       {/* Animated gradient line */}
       <motion.div
@@ -39,23 +47,23 @@ const HeroSection = () => {
         transition={{ duration: 1.5, ease: "easeOut" }}
       />
 
-      <div className="container mx-auto relative z-10 text-center">
+      <div className="container mx-auto relative z-10 text-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+          {/* Role label */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-primary/20 mb-8"
+            className="text-primary/70 font-mono text-xs md:text-sm tracking-[0.3em] uppercase mb-8"
           >
-            <Sparkles size={14} className="text-primary" />
-            <span className="text-primary font-mono text-xs tracking-widest">FULL-STACK SOFTWARE ENGINEER</span>
-          </motion.div>
+            Full-Stack Software Engineer
+          </motion.p>
 
+          {/* Name */}
           <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold mb-6 leading-tight">
             <motion.span
               initial={{ opacity: 0, y: 30 }}
@@ -83,16 +91,31 @@ const HeroSection = () => {
             </motion.span>
           </h1>
 
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
-            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed"
           >
             Building scalable web applications with a focus on
-            <span className="text-primary font-semibold"> Clean Code</span> &
-            <span className="text-accent font-semibold"> Best Practices</span>
+            <span className="text-foreground font-semibold"> Clean Code</span> &
+            <span className="text-foreground font-semibold"> Best Practices</span>
           </motion.p>
+
+          {/* Laravel Specialist pill */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1.0 }}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full glass border border-primary/20 mb-10"
+          >
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="font-mono text-sm">
+              <span className="text-primary font-semibold">Laravel Specialist</span>
+              <span className="text-muted-foreground"> — crafting robust backend systems</span>
+            </span>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -104,15 +127,14 @@ const HeroSection = () => {
             <a
               href="/Shahanur_Rahman_Shohan_CV.pdf"
               download
-              className="group relative bg-gradient-primary text-primary-foreground px-8 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 animate-pulse-glow"
+              className="group border border-primary/30 text-primary px-8 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:bg-primary/10 hover:border-primary/60 transition-all duration-300"
             >
               <Download size={18} />
               Download CV
-              <span className="absolute inset-0 rounded-xl bg-gradient-primary opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
             </a>
             <a
               href="#contact"
-              className="group border border-border text-foreground px-8 py-3.5 rounded-xl font-semibold hover:border-primary hover:text-primary transition-all duration-300 flex items-center gap-2"
+              className="group bg-gradient-primary text-primary-foreground px-8 py-3.5 rounded-xl font-semibold flex items-center gap-2 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300"
             >
               <Mail size={18} />
               Hire Me
@@ -131,7 +153,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3 + i * 0.1 }}
                 whileHover={{ scale: 1.15, y: -4 }}
-                className="w-12 h-12 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:glow transition-all duration-300"
+                className="w-12 h-12 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
                 aria-label={s.label}
               >
                 <s.icon size={18} />
