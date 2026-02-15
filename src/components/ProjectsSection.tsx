@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Folder } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
@@ -34,89 +34,61 @@ const projects = [
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="section-padding relative overflow-hidden">
-      <div className="orb w-[500px] h-[500px] bg-primary -top-40 -right-40" />
-      <div className="orb w-[300px] h-[300px] bg-accent bottom-0 left-0" />
-
-      <div className="container mx-auto relative z-10">
+    <section id="projects" className="section-padding">
+      <div className="container mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-primary/20 mb-4"
-          >
-            <Folder size={14} className="text-primary" />
-            <span className="text-primary font-mono text-xs tracking-widest">MY WORK</span>
-          </motion.div>
-          <h2 className="section-title">
-            Featured <span className="text-gradient">Projects</span>
+          <h2 className="section-title font-mono">
+            {"{{ "}Featured <span className="text-primary">Projects</span>{" }}"}
           </h2>
+          <div className="w-12 h-0.5 bg-primary mx-auto mt-3" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -6 }}
-              className="glass rounded-2xl p-8 group hover:border-primary/40 transition-all duration-400 card-3d relative overflow-hidden"
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -4 }}
+              className="border border-border rounded-xl p-6 text-center group hover:border-primary transition-all duration-300"
             >
-              {/* Gradient border glow on hover */}
-              <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-2xl" />
-
-              <div className="relative z-10">
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center group-hover:shadow-lg group-hover:shadow-primary/30 transition-all">
-                    <Folder size={20} className="text-primary-foreground" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      aria-label={`${project.title} GitHub`}
-                    >
-                      <Github size={18} />
-                    </a>
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                      aria-label={`${project.title} Live`}
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  </div>
-                </div>
-
-                <h3 className="text-xl font-bold text-foreground group-hover:text-gradient transition-all mb-3">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                  {project.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-mono px-3 py-1 rounded-lg bg-secondary/80 text-primary border border-border/50"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              <h3 className="text-foreground font-semibold mb-2 group-hover:text-primary transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                {project.desc}
+              </p>
+              <div className="flex flex-wrap justify-center gap-1 mb-4">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="text-[10px] font-mono px-2 py-0.5 rounded bg-secondary text-muted-foreground">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center justify-center gap-3">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Github size={16} />
+                </a>
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs bg-primary text-primary-foreground px-3 py-1.5 rounded-md font-medium hover:shadow-md transition-all"
+                >
+                  View Details
+                </a>
               </div>
             </motion.div>
           ))}
