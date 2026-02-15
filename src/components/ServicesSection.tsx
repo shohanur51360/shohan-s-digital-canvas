@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import {
   Globe, Server, Plug, LayoutDashboard, Database, ShoppingCart,
   ClipboardList, Bug, RefreshCw, CloudUpload, ShieldCheck, Settings,
-  Wrench,
 } from "lucide-react";
 
 const services = [
@@ -22,46 +21,35 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="section-padding relative overflow-hidden">
-      <div className="orb w-[400px] h-[400px] bg-accent bottom-0 right-0" />
-      <div className="orb w-[300px] h-[300px] bg-primary top-20 -left-20" />
-
-      <div className="container mx-auto relative z-10">
+    <section id="services" className="section-padding">
+      <div className="container mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-primary/20 mb-4"
-          >
-            <Wrench size={14} className="text-primary" />
-            <span className="text-primary font-mono text-xs tracking-widest">WHAT I DO</span>
-          </motion.div>
-          <h2 className="section-title">
-            My <span className="text-gradient">Services</span>
+          <h2 className="section-title font-mono">
+            {"{{ "}My <span className="text-primary">Services</span>{" }}"}
           </h2>
+          <div className="w-12 h-0.5 bg-primary mx-auto mt-3" />
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.5 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass rounded-2xl p-6 group hover:border-primary/40 transition-all duration-300 card-3d"
+              transition={{ delay: i * 0.04 }}
+              whileHover={{ y: -4 }}
+              className="border border-border rounded-xl p-6 text-center group hover:border-primary transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-4 group-hover:shadow-lg group-hover:shadow-primary/30 transition-all duration-300">
-                <service.icon size={22} className="text-primary-foreground" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                <service.icon size={22} className="text-primary" />
               </div>
-              <h3 className="text-foreground font-semibold mb-2 text-sm group-hover:text-gradient transition-all">{service.title}</h3>
+              <h3 className="text-foreground font-semibold mb-2 text-sm">{service.title}</h3>
               <p className="text-muted-foreground text-xs leading-relaxed">{service.desc}</p>
             </motion.div>
           ))}
