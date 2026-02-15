@@ -127,10 +127,10 @@ const AboutSection = () => {
             <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
               I am <span className="text-foreground font-semibold">Shahanur Rahman Shohan</span>, a dedicated Full-Stack Software Engineer with strong expertise in the
               <span className="text-primary"> Laravel</span> and
-              <span className="text-accent"> PHP</span> ecosystem and a BSc in Computer Science & Engineering. I focus on building scalable, secure, and maintainable web applications that deliver real business value — including REST APIs, admin dashboards, e-commerce platforms, POS systems, and custom business solutions. I prioritize clean architecture, structured code, and performance optimization to ensure long-term reliability and smooth user experience.
+              <span className="text-accent"> PHP</span> ecosystem and a BSc in Computer Science & Engineering. I focus on building scalable, secure, and maintainable web applications that deliver real business value including REST APIs, admin dashboards, e-commerce platforms, POS systems, and custom business solutions. I prioritize clean architecture, structured code, and performance optimization to ensure long-term reliability and smooth user experience.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              I am highly comfortable working with PHP, JavaScript, and MySQL, and experienced in both Windows and Linux environments for development and deployment. I enjoy turning complex ideas into practical digital products, continuously learning modern technologies, and delivering production-ready, efficient, and well-engineered solutions that are both technically strong and business-oriented.
+              I am driven by building fast, reliable, and well-structured systems using PHP, JavaScript, and MySQL, and I am comfortable working on both Windows and Linux environments. I enjoy transforming ideas into impactful digital products and always aim to deliver clean, efficient, and production-ready solutions.
             </p>
 
             {/* Contact info */}
